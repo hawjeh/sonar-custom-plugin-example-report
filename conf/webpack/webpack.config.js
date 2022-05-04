@@ -24,14 +24,15 @@ module.exports = {
   // defined in src/main/java/org/sonarsource/plugins/example/web/MyPluginPageDefinition.java
   entry: {
     // Using Vanilla JS:
-    global_page: ["./src/main/js/global_page/index.js"],
+    // global_page: ["./src/main/js/global_page/index.js"],
 
     // Using Backbone JS:
-    project_page: ["./src/main/js/project_page/index.js"],
+    // project_page: ["./src/main/js/project_page/index.js"],
 
     // Using React:
-    portfolio_page: ["./src/main/js/portfolio_page/index.js"],
-    admin_page: ["./src/main/js/admin_page/index.js"]
+    // portfolio_page: ["./src/main/js/portfolio_page/index.js"],
+    // admin_page: ["./src/main/js/admin_page/index.js"],
+    custom_report_page: ["./src/main/js/custom_report_page/index.js"]
   },
   output: {
     // The entry point files MUST be shipped inside the final JAR's static/

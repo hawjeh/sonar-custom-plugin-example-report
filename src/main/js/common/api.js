@@ -21,25 +21,25 @@
 import { getJSON } from "sonar-request";
 
 export function findQualityProfilesStatistics(project) {
-  return getJSON("/api/qualityprofiles/search").then(function(response) {
+  return getJSON("/api/qualityprofiles/search").then(function (response) {
     return response.profiles.length;
   });
 }
 
 export function findQualityQatesStatistics(project) {
-  return getJSON("/api/qualitygates/list").then(function(response) {
+  return getJSON("/api/qualitygates/list").then(function (response) {
     return response.qualitygates.length;
   });
 }
 
 export function findIssuesStatistics(project) {
-  return getJSON("/api/issues/search").then(function(response) {
+  return getJSON("/api/issues/search").then(function (response) {
     return response.total;
   });
 }
 
 export function findProjects(project) {
-  return getJSON("/api/projects/search").then(function(response) {
+  return getJSON("/api/projects/search").then(function (response) {
     return response.components.length;
   });
 }
@@ -49,14 +49,14 @@ export function findVersionsAndMeasures(project) {
     project: project.key,
     p: 1,
     ps: 500
-  }).then(function(responseAnalyses) {
+  }).then(function (responseAnalyses) {
     const numberOfAnalyses = responseAnalyses.analyses.length;
     if (numberOfAnalyses > 0) {
       return getJSON("/api/measures/search_history", {
         component: project.key,
         metrics: "alert_status,bugs,vulnerabilities,sqale_index,reliability_rating,security_rating,sqale_rating",
         ps: 50
-      }).then(function(responseMetrics) {
+      }).then(function (responseMetrics) {
         var data = [];
         var numberOfVersions = 0;
         for (let i = 0; i < numberOfAnalyses; i++) {
@@ -101,5 +101,40 @@ export function findVersionsAndMeasures(project) {
         return data;
       });
     }
+  });
+}
+
+export function findDashboard({key, branch, metrics}) {
+  return getJSON("/api/measures/component", {
+    component: key,
+    branch: branch,
+    metricKeys: metrics,
+  }).then(function (response) {
+    return response.component.measures;
+  });
+}
+
+export function findOwasp2017({key, branch, owasp, caseType, caseStatus, caseSeverity}) {
+  return getJSON("/api/issues/search", {
+    componentKeys: key,
+    branch: branch,
+    owaspTop10: owasp,
+    types: caseType,
+    statuses: caseStatus,
+    severities: caseSeverity
+  }).then(function (response) {
+    return response;
+  });
+}
+
+export function findOwasp2021({key, branch, owasp, caseType, caseStatus, caseSeverity}) {
+  return getJSON("/api/issues/search", {
+    componentKeys: key,
+    branch: branch,
+    'owaspTop10-2021': owasp,
+    types: caseType,
+    statuses: caseStatus,
+  }).then(function (response) {
+    return response;
   });
 }

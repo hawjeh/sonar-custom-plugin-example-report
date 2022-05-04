@@ -2,13 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.sonarsource.plugins.example</groupId>
-  <artifactId>sonar-example-plugin</artifactId>
+  <groupId>org.sonarsource.plugins.websparks</groupId>
+  <artifactId>sonar-websparks-plugin</artifactId>
   <packaging>sonar-plugin</packaging>
   <version>9.0.0</version>
 
-  <name>Example Plugin for SonarQube 9.x</name>
-  <description>Example of Plugin for SonarQube: Foo Language, FooLint, Custom Metrics and MeasureComputers</description>
+  <name>Websparks Plugin for SonarQube 9.x</name>
+  <description>Websparks of Plugin for SonarQube: Reporting</description>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -24,16 +24,16 @@
       <version>${sonar.apiVersion}</version>
       <scope>provided</scope>
     </dependency>
-    <dependency>
+    <!-- <dependency> -->
       <!-- packaged with the plugin -->
-      <groupId>commons-lang</groupId>
+      <!-- <groupId>commons-lang</groupId>
       <artifactId>commons-lang</artifactId>
       <version>2.6</version>
-    </dependency>
+    </dependency> -->
 
 
     <!-- unit tests -->
-    <dependency>
+    <!-- <dependency>
       <groupId>org.sonarsource.sonarqube</groupId>
       <artifactId>sonar-testing-harness</artifactId>
       <version>${sonar.apiVersion}</version>
@@ -44,7 +44,7 @@
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
-    </dependency>
+    </dependency> -->
   </dependencies>
 
   <build>
@@ -55,8 +55,8 @@
         <version>1.21.0.505</version>
         <extensions>true</extensions>
         <configuration>
-          <pluginKey>example</pluginKey>
-          <pluginClass>org.sonarsource.plugins.example.ExamplePlugin</pluginClass>
+          <pluginKey>websparks</pluginKey>
+          <pluginClass>org.sonarsource.plugins.websparks.WebsparksPlugin</pluginClass>
         </configuration>
       </plugin>
       <plugin>
@@ -67,9 +67,9 @@
           <release>11</release>
         </configuration>
       </plugin>
-      <plugin>
+      <!-- <plugin> -->
         <!-- UTF-8 bundles are not supported by Java, so they must be converted during build -->
-        <groupId>org.codehaus.mojo</groupId>
+        <!-- <groupId>org.codehaus.mojo</groupId>
         <artifactId>native2ascii-maven-plugin</artifactId>
         <version>2.0.1</version>
         <executions>
@@ -79,7 +79,7 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
+      </plugin> -->
       <plugin>
         <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>

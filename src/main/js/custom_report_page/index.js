@@ -16,19 +16,14 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-const webpack = require('webpack');
-const config = require('./webpack.config');
+import React from 'react';
+import SecurityReport from './components/SecurityReport';
 
-config.devtool = 'eval';
-
-config.output.publicPath = '/static/websparks/';
-
-config.output.pathinfo = true;
-
-Object.keys(config.entry).forEach(key => {
-  config.entry[key].unshift(require.resolve('react-dev-utils/webpackHotDevClient'));
+// This creates a global administration page, which generates a report of the
+// overall number of Quality Profiles, Quality Gates, total number of issues,
+// and total number of projects.
+//
+//  You can access it at /project/extension/websparks/custom_report_page?id={COMPONENT_ID}
+window.registerExtension('websparks/custom_report_page', (options) => {
+  return <SecurityReport options={options} />
 });
-
-config.plugins = [new webpack.HotModuleReplacementPlugin()];
-
-module.exports = config;

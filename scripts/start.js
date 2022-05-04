@@ -39,7 +39,8 @@ const DEFAULT_PORT = process.env.PORT || 3000;
 let compiler;
 let handleCompile;
 
-const PROXY_URL = process.env.PROXY_URL || 'http://localhost:9000';
+// For Local http://localhost:9000 
+const PROXY_URL = process.env.PROXY_URL || 'https://sonarqube.websparks.sg/';
 
 function setupCompiler(host, port, protocol) {
   // "Compiler" is a low-level interface to Webpack.
