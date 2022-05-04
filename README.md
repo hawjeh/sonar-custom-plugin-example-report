@@ -1,3 +1,9 @@
+### Branch: Custom-Report
+
+This is an example SonarQube plugin compatible with SonarQube 9.x.
+The repo is built for custom report used in Websparks internally.
+
+
 SonarQube Custom Plugin Example [![Build Status](https://travis-ci.org/SonarSource/sonar-custom-plugin-example.svg?branch=7.x)](https://travis-ci.org/SonarSource/sonar-custom-plugin-example)
 ==========
 
