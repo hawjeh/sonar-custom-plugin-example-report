@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-const vulnerability_icon = require('file!./assets/open-lock.png');
-const hotspot_icon = require('file!./assets/shield.png');
-const review_icon = require('file!./assets/review.png');
-const A_icon = require('file!./assets/A.png');
-const B_icon = require('file!./assets/B.png');
-const C_icon = require('file!./assets/C.png');
-const D_icon = require('file!./assets/D.png');
-const E_icon = require('file!./assets/E.png');
+const vulnerability_icon = require('file-loader?name=[hash].[ext]&publicPath=/static/websparks/!./assets/open-lock.png');
+const hotspot_icon = require('file-loader?name=[hash].[ext]&publicPath=/static/websparks/!./assets/shield.png');
+const review_icon = require('file-loader?name=[hash].[ext]&publicPath=/static/websparks/!./assets/review.png');
+const A_icon = require('file-loader?name=[hash].[ext]&publicPath=/static/websparks/!./assets/A.png');
+const B_icon = require('file-loader?name=[hash].[ext]&publicPath=/static/websparks/!./assets/B.png');
+const C_icon = require('file-loader?name=[hash].[ext]&publicPath=/static/websparks/!./assets/C.png');
+const D_icon = require('file-loader?name=[hash].[ext]&publicPath=/static/websparks/!./assets/D.png');
+const E_icon = require('file-loader?name=[hash].[ext]&publicPath=/static/websparks/!./assets/E.png');
 
 const Icon = ({ iconType }) => {
   const style = {
@@ -24,19 +24,9 @@ const Icon = ({ iconType }) => {
   }
 
   const [iconStyle, setIconStyle] = useState({});
-  const [base64Icon, setBase64Icon] = useState();
+  const [iconUrl, setIconUrl] = useState();
 
   useEffect(() => {
-    var img = new Image();
-    img.setAttribute("crossOrigin", "anonymous");
-    img.onload = function () {
-      var canvas = document.createElement('CANVAS');
-      var ctx = canvas.getContext('2d');
-      canvas.height = this.naturalHeight;
-      canvas.width = this.naturalWidth;
-      ctx.drawImage(this, 0, 0);
-      setBase64Icon(canvas.toDataURL());
-    };
     let icon = '';
     if (iconType === 'vulnerability') {
       icon = vulnerability_icon;
@@ -62,11 +52,11 @@ const Icon = ({ iconType }) => {
       setIconStyle(style);
     }
 
-    img.src = icon;
+    setIconUrl(icon);
   }, [iconType]);
 
   return (
-    <img style={iconStyle} alt={iconType + ' icon'} src={base64Icon} title={iconType + ' icon'} />
+    <img style={iconStyle} alt={iconType + ' icon'} src={iconUrl} title={iconType + ' icon'} />
   )
 }
 

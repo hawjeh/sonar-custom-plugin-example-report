@@ -23,7 +23,7 @@ const Report = React.forwardRef(({ project, componentData, caseStatuses, caseSev
       <hr />
       <NewCodeTable componentData={componentData} />
       <hr />
-      <div style={{ height: '200px' }}></div>
+      <div style={{ height: '250px' }}></div>
       <Logo />
       <OwaspReport owaspSelection={owaspSelection} owaspData2021={owaspData2021} owaspData2017={owaspData2017} />
       {/* <hr />
