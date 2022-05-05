@@ -1,23 +1,3 @@
-/*
- * Copyright (C) 2009-2020 SonarSource SA
- * mailto:info AT sonarsource DOT com
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 3 of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this program; if not, write to the Free Software Foundation,
- * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- */
-// SonarRequest (referenced as sonar-request here, see the Webpack config)
-// Exposes helpers for managing API requests.
 import { getJSON } from "sonar-request";
 
 export function findQualityProfilesStatistics(project) {
@@ -104,7 +84,17 @@ export function findVersionsAndMeasures(project) {
   });
 }
 
-export function findDashboard({key, branch, metrics}) {
+// Custom
+
+export function findVersion() {
+  return fetch("/api/server/version").then(function (response) {
+    return response.text();
+  }).then(function (response) {
+    return response;
+  });
+}
+
+export function findComponent({key, branch, metrics}) {
   return getJSON("/api/measures/component", {
     component: key,
     branch: branch,
@@ -118,6 +108,7 @@ export function findOwasp2017({key, branch, owasp, caseType, caseStatus, caseSev
   return getJSON("/api/issues/search", {
     componentKeys: key,
     branch: branch,
+    facets: 'owaspTop10',
     owaspTop10: owasp,
     types: caseType,
     statuses: caseStatus,
@@ -131,9 +122,11 @@ export function findOwasp2021({key, branch, owasp, caseType, caseStatus, caseSev
   return getJSON("/api/issues/search", {
     componentKeys: key,
     branch: branch,
+    facets: 'owaspTop10-2021',
     'owaspTop10-2021': owasp,
     types: caseType,
     statuses: caseStatus,
+    severities: caseSeverity
   }).then(function (response) {
     return response;
   });
