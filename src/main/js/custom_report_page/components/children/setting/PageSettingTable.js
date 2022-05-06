@@ -1,7 +1,7 @@
 import React from 'react';
-import { getSettingTableStyle } from '../../../common/helper';
+import { getSettingTableStyle } from '../../../../common/helper';
 
-const PageSettingTable = ({ onPresetChange, onCaseStatusChange, onCaseSeverityChange, caseStatuses, caseSeverities, onGenerateClick }) => {
+const PageSettingTable = ({ onPresetChange, onCaseStatusChange, onCaseSeverityChange, caseStatuses, caseSeverities, onGenerateClick, onPrintClick, ready }) => {
   const style = getSettingTableStyle();
 
   return (
@@ -94,8 +94,17 @@ const PageSettingTable = ({ onPresetChange, onCaseStatusChange, onCaseSeverityCh
         </td>
       </tr>
       <tr style={style.tr}>
-        <td style={style.td} colspan={2}>
+        <td style={style.td}>
           <button type="button" onClick={(e) => onGenerateClick(e)} style={style.reportBtn}>Generate Report</button>
+        </td>
+        <td>
+          {
+            ready && (
+              <div>
+                <button type="button" onClick={onPrintClick} className="export-btn">Print Report</button>
+              </div>
+            )
+          }
         </td>
       </tr>
     </table>

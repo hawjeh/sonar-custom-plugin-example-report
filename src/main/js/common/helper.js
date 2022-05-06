@@ -27,13 +27,12 @@ export function getSettingTableStyle() {
       'margin-right': '0.5rem'
     },
     reportBtn: {
-      'width': '60%',
       'padding': '0.5rem'
     }
   };
 }
 
-export function getResultTableStyle() {
+export function getCodeTableStyle() {
   return {
     table: {
       'width': '100%'
@@ -54,6 +53,18 @@ export function getResultTableStyle() {
     tdHead: {
       'padding': '0 1rem 0.5rem 0',
       'border': '0px'
+    }
+  };
+}
+
+export function getOwaspTableStyle() {
+  return {
+    table: {
+      'width': '100%'
+    },
+    trFirst: {
+      'padding-top': '0',
+      'padding-left': '0'
     },
     tdOwaspHead: {
       'border': '0px'
@@ -62,35 +73,36 @@ export function getResultTableStyle() {
       'padding': '1rem 1rem 0.5rem 0.5rem',
       'border': '0px',
       'border-bottom': '1px solid #aaa',
-      'width': '50%'
+      'width': '55%'
     },
     tdOther: {
       'padding': '1rem 1rem 0.5rem 0.5rem',
       'border': '0px',
       'border-bottom': '1px solid #aaa',
-      'width': '25%',
+      'width': '15%',
       'text-align': 'right'
     },
     tdCategoryChild: {
       'padding': '1rem 1rem 0.5rem 0.5rem',
       'border': '0px',
-      'width': '50%'
+      'width': '55%'
     },
     tdOtherChild: {
       'padding': '1rem 1rem 0.5rem 0.5rem',
       'border': '0px',
-      'width': '25%',
+      'width': '15%',
       'text-align': 'right'
     },
-    // tdIssueListHead: {
-    //   'padding': '1rem 1rem 0.5rem 0.5rem',
-    //   'border': '0px',
-    //   'border-bottom': '1px solid #aaa',
-    // },
-    // tdIssueList: {
-    //   'padding': '1rem 1rem 0.5rem 0.5rem',
-    //   'border': '0px'
-    // }
+    tdIssue: {
+      'padding': '1rem 1rem 1.5rem 0.5rem',
+      'border': '0px',
+      'border-bottom': '1px solid #aaa',
+    },
+    issuePre: {
+      "padding": "0.3rem 0",
+      "font-size": "0.6rem",
+      "white-space": "pre-wrap"
+    }
   };
 }
 

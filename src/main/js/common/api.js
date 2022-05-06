@@ -94,7 +94,7 @@ export function findVersion() {
   });
 }
 
-export function findComponent({key, branch, metrics}) {
+export function findComponent({ key, branch, metrics }) {
   return getJSON("/api/measures/component", {
     component: key,
     branch: branch,
@@ -104,7 +104,7 @@ export function findComponent({key, branch, metrics}) {
   });
 }
 
-export function findOwasp2017({key, branch, owasp, caseType, caseStatus, caseSeverity}) {
+export function findOwasp2017({ key, branch, owasp, caseType, caseStatus, caseSeverity }) {
   return getJSON("/api/issues/search", {
     componentKeys: key,
     branch: branch,
@@ -118,7 +118,7 @@ export function findOwasp2017({key, branch, owasp, caseType, caseStatus, caseSev
   });
 }
 
-export function findOwasp2021({key, branch, owasp, caseType, caseStatus, caseSeverity}) {
+export function findOwasp2021({ key, branch, owasp, caseType, caseStatus, caseSeverity }) {
   return getJSON("/api/issues/search", {
     componentKeys: key,
     branch: branch,
@@ -130,4 +130,16 @@ export function findOwasp2021({key, branch, owasp, caseType, caseStatus, caseSev
   }).then(function (response) {
     return response;
   });
+}
+
+export function findIssueSnippet({ issueKey }) {
+  return getJSON("/api/sources/issue_snippets", {
+    issueKey
+  });
+}
+
+export function findRule({ key }) {
+  return getJSON("/api/rules/show", {
+    key
+  })
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { getSettingTableStyle, getCaseStatusValue, getCaseSeverityValue } from '../../../common/helper';
+import { getSettingTableStyle, getCaseStatusValue, getCaseSeverityValue } from '../../../../common/helper';
 
 const FilterSettingTable = ({ project, caseStatuses, caseSeverities }) => {
   const style = getSettingTableStyle();

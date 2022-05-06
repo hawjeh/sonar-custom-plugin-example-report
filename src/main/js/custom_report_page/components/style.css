@@ -57,3 +57,29 @@ h6 {
 .export-btn {
   padding: 0.5rem;
 }
+
+.coding-rules-detail-description {
+  margin-top: 0;
+}
+
+.coding-suggestion {
+  padding: 0.5rem;
+  border-top: 1px solid red;
+}
+
+.coding-suggestion p,
+.coding-suggestion h2,
+.coding-suggestion pre {
+  margin: 0;
+}
+
+.coding-suggestion ul {
+  margin: 0.5rem;
+}
+
+@media print {
+  .pagebreak {
+    padding: 1rem;
+    page-break-before: always;
+  }
+}

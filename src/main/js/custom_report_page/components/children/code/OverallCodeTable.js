@@ -1,9 +1,9 @@
 import React from 'react';
-import Icon from '../../../common/icon';
-import { getResultTableStyle, getComponentValue, getComponentRating } from '../../../common/helper';
+import Icon from '../../../../common/icon';
+import { getCodeTableStyle, getComponentValue, getComponentRating } from '../../../../common/helper';
 
 const OverallCodeTable = ({ componentData }) => {
-  const style = getResultTableStyle();
+  const style = getCodeTableStyle();
 
   return (
     <table style={style.table}>

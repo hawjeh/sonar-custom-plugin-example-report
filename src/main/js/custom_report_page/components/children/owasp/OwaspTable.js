@@ -1,9 +1,8 @@
 import React from 'react';
-import Icon from '../../../common/icon';
-import { getResultTableStyle, getOwapsRating } from '../../../common/helper';
+import { getOwaspTableStyle, getOwapsRating } from '../../../../common/helper';
 
-const OwaspReport = ({ owaspSelection, owaspData2021, owaspData2017 }) => {
-  const style = getResultTableStyle();
+const OwaspTable = ({ owaspSelection, owaspData2021, owaspData2017 }) => {
+  const style = getOwaspTableStyle();
 
   const owaspTop102017 = ["A1 - Injection", "A2 - Broken Authentication", "A3 - Sensitive Data Exposure", "A4 - XML External Entities (XXE)", "A5 - Broken Access Control",
     "A6 - Security Misconfiguration", "A7 - Cross-Site Scripting (XSS)", "A8 - Insecure Deserialization", "A9 - Using Components with Known Vulnerabilities", "A10 - Insufficient Logging & Monitoring"];
@@ -14,14 +13,20 @@ const OwaspReport = ({ owaspSelection, owaspData2021, owaspData2017 }) => {
   const owaspTop10Name = owaspSelection === '2021' ? owaspTop102021 : owaspTop102017;
   const owaspTop10Detail = owaspSelection === '2021' ? owaspData2021 : owaspData2017;
 
-  const printOwaspTop10 = (top10Name, top10Detail) => {
+  const printOwaspTop10 = (owaspName, top10Detail) => {
     return (
       <tr>
         <td style={style.tdCategoryChild}>
-          {top10Name}
+          {owaspName}
         </td>
         <td style={style.tdOtherChild}>
-        {top10Detail.issues.length === 0 ? '-' : top10Detail.issues.filter(x => x.status !== "CLOSED" && x.status !== "RESOLVED").length} {getOwapsRating(top10Detail)}
+          {top10Detail.issues.length}
+        </td>
+        <td style={style.tdOtherChild}>
+          {top10Detail.issues.filter(x => x.status === "CLOSED" || x.status === "RESOLVED").length}
+        </td>
+        <td style={style.tdOtherChild}>
+          {top10Detail.issues.length - top10Detail.issues.filter(x => x.status === "CLOSED" || x.status === "RESOLVED").length} {getOwapsRating(top10Detail)}
         </td>
       </tr>
     )
@@ -38,10 +43,16 @@ const OwaspReport = ({ owaspSelection, owaspData2021, owaspData2017 }) => {
       </tr>
       <tr>
         <td style={style.tdCategory}>
-          Categories
+          <b>Categories</b>
         </td>
         <td style={style.tdOther}>
-          <Icon iconType='vulnerability' /> Security Vulnerabilities
+          <b>Issue Found</b>
+        </td>
+        <td style={style.tdOther}>
+          <b>Resolved</b>
+        </td>
+        <td style={style.tdOther}>
+          <b>To Review</b>
         </td>
       </tr>
       {owaspTop10Detail.map((i, j) => printOwaspTop10(owaspTop10Name[j], i))}
@@ -49,4 +60,4 @@ const OwaspReport = ({ owaspSelection, owaspData2021, owaspData2017 }) => {
   )
 }
 
-export default OwaspReport;
+export default OwaspTable;

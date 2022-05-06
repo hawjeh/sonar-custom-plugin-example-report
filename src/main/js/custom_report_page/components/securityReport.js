@@ -3,7 +3,7 @@ import { useReactToPrint } from 'react-to-print';
 import { findVersion, findComponent, findOwasp2021, findOwasp2017 } from "../../common/api";
 import { getCaseStatusValue, getCaseSeverityValue } from "../../common/helper";
 
-import PageSettingTable from './children/PageSettingTable';
+import PageSettingTable from './children/setting/PageSettingTable';
 import Report from './children/Report';
 import './style.css';
 
@@ -132,7 +132,8 @@ const SecurityReport = (props) => {
         <h3 className="page-title">Websparks - Custom Security Report</h3>
       </header>
       <div className="page-setting">
-        <PageSettingTable onPresetChange={onPresetChange} onCaseStatusChange={onCaseStatusChange} onCaseSeverityChange={onCaseSeverityChange} onGenerateClick={onGenerateClick} caseStatuses={caseStatuses} caseSeverities={caseSeverities} />
+        <PageSettingTable onPresetChange={onPresetChange} onCaseStatusChange={onCaseStatusChange} onCaseSeverityChange={onCaseSeverityChange} 
+        onGenerateClick={onGenerateClick} onPrintClick={onPrintClick} ready={ready} caseStatuses={caseStatuses} caseSeverities={caseSeverities} />
       </div>
       <div id='report_out_wrapper' className="bg-white">
         {
@@ -143,13 +144,7 @@ const SecurityReport = (props) => {
           )
         }
       </div>
-      {
-        ready && (
-          <div>
-            <button type="button" onClick={onPrintClick} className="export-btn">Print Report</button>
-          </div>
-        )
-      }
+
     </div>
   )
 }

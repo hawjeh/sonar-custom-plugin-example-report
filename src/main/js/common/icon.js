@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 const vulnerability_icon = require('file-loader?name=[hash].[ext]&publicPath=/static/websparks/!./assets/open-lock.png');
+const resolved_icon = require('file-loader?name=[hash].[ext]&publicPath=/static/websparks/!./assets/lock.png');
 const hotspot_icon = require('file-loader?name=[hash].[ext]&publicPath=/static/websparks/!./assets/shield.png');
 const review_icon = require('file-loader?name=[hash].[ext]&publicPath=/static/websparks/!./assets/review.png');
 const A_icon = require('file-loader?name=[hash].[ext]&publicPath=/static/websparks/!./assets/A.png');
@@ -30,6 +31,8 @@ const Icon = ({ iconType }) => {
     let icon = '';
     if (iconType === 'vulnerability') {
       icon = vulnerability_icon;
+    } else if (iconType === 'resolved') {
+      icon = resolved_icon;
     } else if (iconType === 'hotspot') {
       icon = hotspot_icon;
     } else if (iconType === 'review') {

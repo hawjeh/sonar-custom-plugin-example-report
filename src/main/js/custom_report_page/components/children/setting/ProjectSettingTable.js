@@ -1,5 +1,5 @@
 import React from 'react';
-import { getSettingTableStyle, getComponentValue } from '../../../common/helper';
+import { getSettingTableStyle, getComponentValue } from '../../../../common/helper';
 
 const ProjectSettingTable = ({ project, componentData }) => {
   const style = getSettingTableStyle();
