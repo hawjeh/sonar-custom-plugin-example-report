@@ -38,6 +38,10 @@ h6 {
 
 #report_wrapper {
   padding: 1rem;
+  height: 900px;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 #report_out_wrapper {

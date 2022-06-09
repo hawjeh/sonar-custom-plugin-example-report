@@ -8,7 +8,7 @@ import OwaspListTable from './owasp/OwaspListTable';
 import ProjectSettingTable from './setting/ProjectSettingTable';
 import ReportTitle from './ReportTitle';
 
-const Report = React.forwardRef(({ project, componentData, caseStatuses, caseSeverities, owaspSelection, owaspData2021, owaspData2017 }, ref) => {
+const Report = React.forwardRef(({ project, componentData, caseStatuses, caseSeverities, owaspData2021, owaspData2017 }, ref) => {
   return (
     <div id="report_wrapper" ref={ref}>
       <div className="pagebreak">
@@ -28,10 +28,17 @@ const Report = React.forwardRef(({ project, componentData, caseStatuses, caseSev
       <div style={{ height: '50px' }}></div>
       <div className="pagebreak">
         <Logo />
-        <OwaspTable owaspSelection={owaspSelection} owaspData2021={owaspData2021} owaspData2017={owaspData2017} />
+        <OwaspTable owaspSelection='2017' owaspData2021={owaspData2021} owaspData2017={owaspData2017} />
       </div>
       <div style={{ height: '50px' }}></div>
-      <OwaspListTable owaspSelection={owaspSelection} owaspData2021={owaspData2021} owaspData2017={owaspData2017} />
+      <div className="pagebreak">
+        <Logo />
+        <OwaspTable owaspSelection='2021' owaspData2021={owaspData2021} owaspData2017={owaspData2017} />
+      </div>
+      <div style={{ height: '50px' }}></div>
+      <OwaspListTable owaspSelection='2021' owaspData2021={owaspData2021} owaspData2017={owaspData2017} />
+      <div style={{ height: '50px'}}></div>
+      <OwaspListTable owaspSelection='2017' owaspData2021={owaspData2021} owaspData2017={owaspData2017} />
     </div>
   )
 })

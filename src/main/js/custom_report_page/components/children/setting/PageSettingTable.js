@@ -1,20 +1,11 @@
 import React from 'react';
 import { getSettingTableStyle } from '../../../../common/helper';
 
-const PageSettingTable = ({ onPresetChange, onCaseStatusChange, onCaseSeverityChange, caseStatuses, caseSeverities, onGenerateClick, onPrintClick, ready }) => {
+const PageSettingTable = ({ onCaseStatusChange, onCaseSeverityChange, caseStatuses, caseSeverities, onGenerateClick, onPrintClick, ready }) => {
   const style = getSettingTableStyle();
 
   return (
     <table style={style.table}>
-      <tr style={style.tr}>
-        <td style={style.tdBold}>Preset</td>
-        <td style={style.td}>
-          <select onChange={(e) => onPresetChange(e)}>
-            <option value="OWASP TOP 10 - 2021">OWASP TOP 10 - 2021</option>
-            <option value="OWASP TOP 10 - 2017">OWASP TOP 10 - 2017</option>
-          </select>
-        </td>
-      </tr>
       <tr style={style.tr}>
         <td style={style.tdBold}>Case Statuses</td>
         <td style={style.td}>

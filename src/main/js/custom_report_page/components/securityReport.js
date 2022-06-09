@@ -10,9 +10,7 @@ import './style.css';
 const SecurityReport = (props) => {
   const componentRef = useRef();
   const [ready, setReady] = useState(false);
-  const [project, setProject] = useState({
-    preset: 'OWASP TOP 10 - 2021'
-  });
+  const [project, setProject] = useState({});
   const metrics = useState("alert_status,quality_gate_details,bugs,new_bugs,reliability_rating,new_reliability_rating,vulnerabilities,new_vulnerabilities,security_rating,new_security_rating,security_hotspots,new_security_hotspots,security_hotspots_reviewed,new_security_hotspots_reviewed,security_review_rating,new_security_review_rating,code_smells,new_code_smells,sqale_rating,new_maintainability_rating,sqale_index,new_technical_debt,coverage,new_coverage,lines_to_cover,new_lines_to_cover,tests,duplicated_lines_density,new_duplicated_lines_density,duplicated_blocks,ncloc,ncloc_language_distribution,projects,lines,new_lines");
   const [caseStatuses, setCaseStatuses] = useState({
     OPEN: true,
@@ -30,7 +28,6 @@ const SecurityReport = (props) => {
   });
 
   const [componentData, setComponentData] = useState([]);
-  const [owaspSelection, setOwaspSelection] = useState('2021');
   const [owaspData2017, setOwaspData2017] = useState([]);
   const [owaspData2021, setOwaspData2021] = useState([]);
 
@@ -46,11 +43,6 @@ const SecurityReport = (props) => {
   }, [props]);
 
   // Report Actions
-  const onPresetChange = (e) => {
-    project.preset = e.target.value;
-    setProject(project);
-  }
-
   const onCaseStatusChange = (e) => {
     if (e === 'OPEN') {
       caseStatuses.OPEN = !caseStatuses.OPEN;
@@ -90,34 +82,27 @@ const SecurityReport = (props) => {
     const caseStatus = getCaseStatusValue(caseStatuses, true);
     const caseSeverity = getCaseSeverityValue(caseSeverities, true);
     const promises = [];
-    let selection = '2021';
     let query = { key, branch, caseType, caseStatus, caseSeverity };
 
-    if (project.preset === 'OWASP TOP 10 - 2021') {
-      selection = '2021';
-      for (let i = 1; i <= 10; i++) {
-        query.owasp = `a${i}`;
-        promises.push(findOwasp2021(query));
-      }
-    } else if (project.preset === 'OWASP TOP 10 - 2017') {
-      selection = '2017';
-      for (let i = 1; i <= 10; i++) {
-        query.owasp = `a${i}`;
-        promises.push(findOwasp2017(query));
-      }
+    for (let i = 1; i <= 10; i++) {
+      query.owasp = `a${i}`;
+      promises.push(findOwasp2017(query));
+    }
+
+    for (let i = 1; i <= 10; i++) {
+      query.owasp = `a${i}`;
+      promises.push(findOwasp2021(query));
     }
 
     promises.push(findVersion(), findComponent({ key, branch, metrics }));
     Promise.all(promises).then((results) => {
       const owaspResults = results.slice(0, 10);
-      if (selection === '2021') {
-        setOwaspData2021(owaspResults);
-      } else if (selection === '2017') {
-        setOwaspData2017(owaspResults);
-      }
-      project.sqVersion = results[10];
-      setComponentData(results[11]);
-      setOwaspSelection(selection);
+      setOwaspData2017(owaspResults);
+      const owaspResults2021 = results.slice(11, 20);
+      setOwaspData2021(owaspResults2021);
+
+      project.sqVersion = results[results.length - 2];
+      setComponentData(results[results.length - 1]);
       setReady(true);
     });
   }
@@ -132,15 +117,14 @@ const SecurityReport = (props) => {
         <h3 className="page-title">Websparks - Custom Security Report</h3>
       </header>
       <div className="page-setting">
-        <PageSettingTable onPresetChange={onPresetChange} onCaseStatusChange={onCaseStatusChange} onCaseSeverityChange={onCaseSeverityChange} 
-        onGenerateClick={onGenerateClick} onPrintClick={onPrintClick} ready={ready} caseStatuses={caseStatuses} caseSeverities={caseSeverities} />
+        <PageSettingTable onCaseStatusChange={onCaseStatusChange} onCaseSeverityChange={onCaseSeverityChange}
+          onGenerateClick={onGenerateClick} onPrintClick={onPrintClick} ready={ready} caseStatuses={caseStatuses} caseSeverities={caseSeverities} />
       </div>
       <div id='report_out_wrapper' className="bg-white">
         {
           ready && (
             <Report ref={componentRef} project={project} componentData={componentData}
-              caseStatuses={caseStatuses} caseSeverities={caseSeverities}
-              owaspSelection={owaspSelection} owaspData2021={owaspData2021} owaspData2017={owaspData2017} />
+              caseStatuses={caseStatuses} caseSeverities={caseSeverities} owaspData2021={owaspData2021} owaspData2017={owaspData2017} />
           )
         }
       </div>
