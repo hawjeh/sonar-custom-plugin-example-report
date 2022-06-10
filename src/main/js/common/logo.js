@@ -4,8 +4,7 @@ const sonarqube_logo = require('file-loader?name=[hash].[ext]&publicPath=/static
 const Logo = () => {
   const style = {
     'display': 'block',
-    'margin-left': 'auto',
-    'margin-bottom': '1.5rem'
+    'margin-left': 'auto'
   };
 
   return (

@@ -2,7 +2,7 @@ import React from 'react';
 import Logo from '../../../common/logo';
 import FilterSettingTable from './setting/FilterSettingTable';
 import IssueTable from './snippets/IssueTable';
-import ListTable from './snippets/ListTable';
+import IssueListTable from './snippets/IssueListTable';
 import NewCodeTable from './code/NewCodeTable';
 import OverallCodeTable from './code/OverallCodeTable';
 import ProjectSettingTable from './setting/ProjectSettingTable';
@@ -29,10 +29,10 @@ const Report = React.forwardRef(({ project, componentData, caseStatuses, caseSev
       <IssueTable title={'OWASP Top 10 - 2021'} details={owasp2021} names={getOwasp2021Name()} />
       <IssueTable title={'SonarSource Perspective'} details={sonarSource} names={getSonarSourceName()} />
       <IssueTable title={'CWE Top 25 2021 Perspective'} details={cwe2021} names={getCweName()} />
-      <ListTable title={'OWASP Top 10 - 2017'} details={owasp2017} names={getOwasp2017Name()} />
-      <ListTable title={'OWASP Top 10 - 2021'} details={owasp2021} names={getOwasp2021Name()} />
-      <ListTable title={'SonarSource Perspective'} details={sonarSource} names={getSonarSourceName()} />
-      <ListTable title={'CWE Top 25 2021 Perspective'} details={cwe2021} names={getCweName()} />
+      <IssueListTable title={'OWASP Top 10 - 2017'} details={owasp2017} names={getOwasp2017Name()} />
+      <IssueListTable title={'OWASP Top 10 - 2021'} details={owasp2021} names={getOwasp2021Name()} />
+      <IssueListTable title={'SonarSource Perspective'} details={sonarSource} names={getSonarSourceName()} />
+      <IssueListTable title={'CWE Top 25 2021 Perspective'} details={cwe2021} names={getCweName()} />
     </div>
   )
 })

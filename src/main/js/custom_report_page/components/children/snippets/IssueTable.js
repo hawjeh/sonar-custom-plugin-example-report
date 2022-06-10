@@ -40,7 +40,7 @@ const IssueTable = ({ title, details, names }) => {
             <b>Categories</b>
           </td>
           <td style={style.tdOther}>
-            <b>Issue Found</b>
+            <b>Issue</b>
           </td>
           <td style={style.tdOther}>
             <b>Resolved</b>

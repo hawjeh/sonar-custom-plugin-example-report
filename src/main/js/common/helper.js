@@ -70,27 +70,27 @@ export function getTableStyle() {
       'border': '0px'
     },
     tdCategory: {
-      'padding': '1rem 1rem 0.5rem 0.5rem',
+      'padding': '0rem 1rem 0.5rem 0.5rem',
       'border': '0px',
       'border-bottom': '1px solid #aaa',
-      'width': '55%'
+      'width': '60%'
     },
     tdOther: {
-      'padding': '1rem 1rem 0.5rem 0.5rem',
+      'padding': '0rem 1rem 0.5rem 0.5rem',
       'border': '0px',
       'border-bottom': '1px solid #aaa',
-      'width': '15%',
+      'width': '13%',
       'text-align': 'right'
     },
     tdCategoryChild: {
       'padding': '1rem 1rem 0.5rem 0.5rem',
       'border': '0px',
-      'width': '55%'
+      'width': '60%'
     },
     tdOtherChild: {
       'padding': '1rem 1rem 0.5rem 0.5rem',
       'border': '0px',
-      'width': '15%',
+      'width': '13%',
       'text-align': 'right'
     },
     tdIssue: {

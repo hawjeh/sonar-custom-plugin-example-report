@@ -3,7 +3,7 @@ import Logo from '../../../../common/logo';
 import ListSnippet from './ListSnippet';
 import { getTableStyle } from '../../../../common/helper';
 
-const ListTable = ({ title, details, names }) => {
+const IssueListTable = ({ title, details, names }) => {
   const style = getTableStyle();
 
   const printIssueSnippet = (detail, name) => {
@@ -39,4 +39,4 @@ const ListTable = ({ title, details, names }) => {
 
 }
 
-export default ListTable;
+export default IssueListTable;
