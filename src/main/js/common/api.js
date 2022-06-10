@@ -132,6 +132,32 @@ export function findOwasp2021({ key, branch, owasp, caseType, caseStatus, caseSe
   });
 }
 
+export function findSonarSource({ key, branch, sonarMetrics, caseType, caseStatus, caseSeverity }) {
+  return getJSON("/api/issues/search", {
+    componentKeys: key,
+    branch: branch,
+    sonarsourceSecurity: sonarMetrics,
+    types: caseType,
+    statuses: caseStatus,
+    severities: caseSeverity
+  }).then(function (response) {
+    return response;
+  });
+}
+
+export function findCwe2021({ key, branch, cwe, caseType, caseStatus, caseSeverity }) {
+  return getJSON("/api/issues/search", {
+    componentKeys: key,
+    branch: branch,
+    cwe: cwe,
+    types: caseType,
+    statuses: caseStatus,
+    severities: caseSeverity
+  }).then(function (response) {
+    return response;
+  });
+}
+
 export function findIssueSnippet({ issueKey }) {
   return getJSON("/api/sources/issue_snippets", {
     issueKey

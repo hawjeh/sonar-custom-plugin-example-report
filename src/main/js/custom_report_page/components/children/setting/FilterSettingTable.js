@@ -7,10 +7,6 @@ const FilterSettingTable = ({ project, caseStatuses, caseSeverities }) => {
   return (
     <table style={style.table}>
       <tr style={style.tr}>
-        <td style={style.tdBold}>Preset</td>
-        <td style={style.td}>{project.preset}</td>
-      </tr>
-      <tr style={style.tr}>
         <td style={style.tdBold}>Case Statuses</td>
         <td style={style.td}>
           Include: {getCaseStatusValue(caseStatuses, true)}

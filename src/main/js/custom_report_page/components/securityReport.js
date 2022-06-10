@@ -1,6 +1,7 @@
 import React, { memo, useState, useEffect, useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
-import { findVersion, findComponent, findOwasp2021, findOwasp2017 } from "../../common/api";
+import { findVersion, findComponent, findOwasp2021, findOwasp2017, findSonarSource, findCwe2021 } from "../../common/api";
+import { getMetrics, getSonarMetrics, getCweMetrics } from "../../common/constant";
 import { getCaseStatusValue, getCaseSeverityValue } from "../../common/helper";
 
 import PageSettingTable from './children/setting/PageSettingTable';
@@ -11,7 +12,11 @@ const SecurityReport = (props) => {
   const componentRef = useRef();
   const [ready, setReady] = useState(false);
   const [project, setProject] = useState({});
-  const metrics = useState("alert_status,quality_gate_details,bugs,new_bugs,reliability_rating,new_reliability_rating,vulnerabilities,new_vulnerabilities,security_rating,new_security_rating,security_hotspots,new_security_hotspots,security_hotspots_reviewed,new_security_hotspots_reviewed,security_review_rating,new_security_review_rating,code_smells,new_code_smells,sqale_rating,new_maintainability_rating,sqale_index,new_technical_debt,coverage,new_coverage,lines_to_cover,new_lines_to_cover,tests,duplicated_lines_density,new_duplicated_lines_density,duplicated_blocks,ncloc,ncloc_language_distribution,projects,lines,new_lines");
+
+  const metrics = getMetrics();
+  const sonarMetrics = getSonarMetrics();
+  const cweMetrics = getCweMetrics();
+
   const [caseStatuses, setCaseStatuses] = useState({
     OPEN: true,
     CONFIRMED: true,
@@ -28,8 +33,10 @@ const SecurityReport = (props) => {
   });
 
   const [componentData, setComponentData] = useState([]);
-  const [owaspData2017, setOwaspData2017] = useState([]);
-  const [owaspData2021, setOwaspData2021] = useState([]);
+  const [owasp2017, setowasp2017] = useState([]);
+  const [owasp2021, setowasp2021] = useState([]);
+  const [sonarSource, setSonarSource] = useState([]);
+  const [cwe2021, setCwe2021] = useState([]);
 
   useEffect(() => {
     const key = props.options.component.key;
@@ -94,12 +101,30 @@ const SecurityReport = (props) => {
       promises.push(findOwasp2021(query));
     }
 
+    const sonarMetricsArr = sonarMetrics.split(',');
+    for (let i = 0; i <= sonarMetricsArr.length; i++) {
+      query.sonarMetrics = sonarMetricsArr[i];
+      promises.push(findSonarSource(query));
+    }
+
+    const cweMetricsArr = cweMetrics.split(',');
+    for (let i = 0; i <= cweMetricsArr.length; i++) {
+      query.cwe = cweMetricsArr[i];
+      promises.push(findCwe2021(query));
+    }
+
     promises.push(findVersion(), findComponent({ key, branch, metrics }));
     Promise.all(promises).then((results) => {
       const owaspResults = results.slice(0, 10);
-      setOwaspData2017(owaspResults);
-      const owaspResults2021 = results.slice(11, 20);
-      setOwaspData2021(owaspResults2021);
+      setowasp2017(owaspResults);
+      const owaspResults2021 = results.slice(10, 20);
+      setowasp2021(owaspResults2021);
+
+      const sonarResults = results.slice(20, 20 + sonarMetricsArr.length);
+      setSonarSource(sonarResults);
+      // skip Others
+      const cweTop25Results = results.slice(21 + sonarMetricsArr.length, 21 + sonarMetricsArr.length + cweMetricsArr.length);
+      setCwe2021(cweTop25Results);
 
       project.sqVersion = results[results.length - 2];
       setComponentData(results[results.length - 1]);
@@ -123,8 +148,14 @@ const SecurityReport = (props) => {
       <div id='report_out_wrapper' className="bg-white">
         {
           ready && (
-            <Report ref={componentRef} project={project} componentData={componentData}
-              caseStatuses={caseStatuses} caseSeverities={caseSeverities} owaspData2021={owaspData2021} owaspData2017={owaspData2017} />
+            <Report ref={componentRef} project={project}
+              componentData={componentData}
+              caseStatuses={caseStatuses}
+              caseSeverities={caseSeverities}
+              owasp2021={owasp2021}
+              owasp2017={owasp2017}
+              sonarSource={sonarSource}
+              cwe2021={cwe2021} />
           )
         }
       </div>

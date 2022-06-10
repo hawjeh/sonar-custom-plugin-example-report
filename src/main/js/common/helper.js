@@ -57,7 +57,7 @@ export function getCodeTableStyle() {
   };
 }
 
-export function getOwaspTableStyle() {
+export function getTableStyle() {
   return {
     table: {
       'width': '100%'
@@ -66,7 +66,7 @@ export function getOwaspTableStyle() {
       'padding-top': '0',
       'padding-left': '0'
     },
-    tdOwaspHead: {
+    tdHead: {
       'border': '0px'
     },
     tdCategory: {
@@ -123,7 +123,7 @@ export function getComponentRating(value) {
   return <Icon iconType="A" />;
 }
 
-export function getOwapsRating(detail) {
+export function getRating(detail) {
   if (detail.issues.length === 0) return '';
   let rating = 'A';
   const blocker = detail.issues.filter(x => x.severity === "BLOCKER" && x.status !== "CLOSED" && x.status !== "RESOLVED").length;

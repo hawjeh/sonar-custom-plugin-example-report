@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { findIssueSnippet, findRule } from '../../../../common/api';
-import { getOwaspTableStyle } from '../../../../common/helper';
+import { getTableStyle } from '../../../../common/helper';
 
-const OwaspListSnippet = ({ issue }) => {
+const ListSnippet = ({ issue }) => {
   const { key, component, line, message, rule } = issue;
-  const style = getOwaspTableStyle();
+  const style = getTableStyle();
 
   const [componentData, setComponentData] = useState({});
   const [sourcesData, setSourcesData] = useState([]);
@@ -51,4 +51,4 @@ const OwaspListSnippet = ({ issue }) => {
   )
 }
 
-export default OwaspListSnippet;
+export default ListSnippet;
